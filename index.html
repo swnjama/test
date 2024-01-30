@@ -1,4 +1,5 @@
-<script src="https://cdn.jsdelivr.net/gh/netizenorg/netnet-standard-library/build/nn.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/netizenorg/netnet-standard-library/build/nn.min.js">
+</script>
 <script>
   // global nn
 
@@ -18,7 +19,7 @@
         top: `${y}px`,
         width: `${w}px`,
         height: `${h}px`,
-        border: '1px solid black'
+        // border: '1px solid black'
       })
       .addTo('body')
   }
@@ -29,12 +30,19 @@
     // const style = {'background-color': bgColor,}
     // b.css(style)
     nn.get('body').css({
-      'background-color': bgColor
+      'background-color': bgColor, 
+      'overflow': 'hidden'
     })
     const s = 140
-    const x = (nn.width / 2) - (s / 2)
-    const y = (nn.height / 2) - (s / 2)
-    createGif(x, y, s, s, gifURL)
+    const numColumns = nn.width / (s / 4)
+    
+    for( let r = 0; r < 100; r++){
+      for (let c = 0; c < 100; c++){
+      const x = c * (s/4) - (s/2)
+      const y = r * (s/4) - (s/4)
+      createGif(x, y, s, s, gifURL)  
+      }  
+    } 
   }
 
   nn.on('load', setup)
